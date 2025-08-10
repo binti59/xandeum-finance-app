@@ -16,7 +16,8 @@ import {
   CheckCircle,
   Server,
   Lock,
-  BarChart3
+  BarChart3,
+  Check
 } from 'lucide-react'
 
 const storageFeatures = [
@@ -140,7 +141,10 @@ export default function XandeumStorage() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold">{feature.title}</h4>
-                    <Badge className="bg-green-500">{feature.status}</Badge>
+                    <Badge className="bg-green-500 text-white flex items-center gap-1">
+                      <Check className="h-3 w-3" />
+                      {feature.status}
+                    </Badge>
                   </div>
                   <p className="text-sm font-medium mb-1">{feature.description}</p>
                   <p className="text-xs text-muted-foreground">{feature.details}</p>
@@ -193,7 +197,10 @@ export default function XandeumStorage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge className="bg-green-500 mb-1">{node.status}</Badge>
+                    <Badge className="bg-green-500 text-white flex items-center gap-1 mb-1">
+                      <Check className="h-3 w-3" />
+                      {node.status}
+                    </Badge>
                     <div className="text-sm text-muted-foreground">{node.latency}</div>
                   </div>
                 </div>
