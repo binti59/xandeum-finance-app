@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { TrendingUp, TrendingDown, DollarSign, PieChart, BarChart3, Shield, Database, Zap, RefreshCw } from 'lucide-react'
+import { TrendingUp, TrendingDown, DollarSign, PieChart, BarChart3, Shield, Database, Zap, RefreshCw, Clock, RotateCcw, Lock, HardDrive } from 'lucide-react'
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, PieChart as RechartsPieChart, Cell } from 'recharts'
 
 const netWorthData = [
@@ -23,15 +23,15 @@ const monthlyChanges = [
 
 const assetsBreakdown = [
   { name: 'Cash & Savings', value: 57500, percentage: 20.2, color: '#3b82f6' },
-  { name: 'Investment Portfolio', value: 185000, percentage: 64.9, color: '#10b981' },
-  { name: 'Retirement Accounts', value: 35000, percentage: 12.3, color: '#8b5cf6' },
-  { name: 'Real Estate', value: 7500, percentage: 2.6, color: '#f59e0b' }
+  { name: 'Investment Portfolio', value: 185000, percentage: 64.9, color: '#8b5cf6' },
+  { name: 'Retirement Accounts', value: 35000, percentage: 12.3, color: '#10b981' },
+  { name: 'Real Estate', value: 7500, percentage: 2.6, color: '#06b6d4' }
 ]
 
 const liabilitiesBreakdown = [
   { name: 'Credit Cards', value: 2800, percentage: 22.4, color: '#ef4444' },
   { name: 'Student Loans', value: 8500, percentage: 68.0, color: '#f97316' },
-  { name: 'Auto Loan', value: 1200, percentage: 9.6, color: '#84cc16' }
+  { name: 'Auto Loan', value: 1200, percentage: 9.6, color: '#ef4444' }
 ]
 
 export default function NetWorth() {
@@ -183,16 +183,21 @@ export default function NetWorth() {
             <CardDescription>Complete breakdown of assets by category</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-6">
               {assetsBreakdown.map((asset, index) => (
-                <div key={index} className="space-y-2">
+                <div key={index} className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium">{asset.name}</span>
-                    <span className="font-bold">${asset.value.toLocaleString()}</span>
+                    <span className="font-medium text-white">{asset.name}</span>
+                    <span className="font-bold text-green-500">${asset.value.toLocaleString()}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Progress value={asset.percentage} className="flex-1" />
-                    <span className="text-sm text-muted-foreground w-12">{asset.percentage}%</span>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="h-2 rounded-full transition-all duration-300"
+                      style={{ 
+                        width: `${asset.percentage}%`,
+                        backgroundColor: asset.color
+                      }}
+                    ></div>
                   </div>
                   <p className="text-xs text-muted-foreground">{asset.percentage}% of total assets</p>
                 </div>
@@ -208,16 +213,21 @@ export default function NetWorth() {
             <CardDescription>Complete breakdown of liabilities by category</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-6">
               {liabilitiesBreakdown.map((liability, index) => (
-                <div key={index} className="space-y-2">
+                <div key={index} className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium">{liability.name}</span>
-                    <span className="font-bold">${liability.value.toLocaleString()}</span>
+                    <span className="font-medium text-white">{liability.name}</span>
+                    <span className="font-bold text-red-500">${liability.value.toLocaleString()}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Progress value={liability.percentage} className="flex-1" />
-                    <span className="text-sm text-muted-foreground w-12">{liability.percentage}%</span>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="h-2 rounded-full transition-all duration-300"
+                      style={{ 
+                        width: `${liability.percentage}%`,
+                        backgroundColor: liability.color
+                      }}
+                    ></div>
                   </div>
                   <p className="text-xs text-muted-foreground">{liability.percentage}% of total liabilities</p>
                 </div>
@@ -230,26 +240,38 @@ export default function NetWorth() {
       {/* Xandeum Net Worth Analytics */}
       <Card className="xandeum-card">
         <CardHeader>
-          <CardTitle>Xandeum Net Worth Analytics</CardTitle>
+          <CardTitle className="text-blue-400">Xandeum Net Worth Analytics</CardTitle>
           <CardDescription>Comprehensive net worth tracking with historical data stored on Xandeum's decentralized network</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold text-primary">6 Months</div>
-              <p className="text-sm text-muted-foreground">Historical Data</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+              <div className="flex justify-center mb-3">
+                <Clock className="h-8 w-8 text-blue-400" />
+              </div>
+              <div className="text-2xl font-bold text-blue-400">6 Months</div>
+              <p className="text-sm text-muted-foreground mt-1">Historical Data</p>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-green-500">Auto-Update</div>
-              <p className="text-sm text-muted-foreground">Real-time Sync</p>
+            <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+              <div className="flex justify-center mb-3">
+                <RotateCcw className="h-8 w-8 text-green-400" />
+              </div>
+              <div className="text-2xl font-bold text-green-400">Auto-Update</div>
+              <p className="text-sm text-muted-foreground mt-1">Real-time Sync</p>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-primary">Immutable</div>
-              <p className="text-sm text-muted-foreground">Historical Record</p>
+            <div className="text-center p-4 rounded-lg bg-purple-500/10 border border-purple-500/20">
+              <div className="flex justify-center mb-3">
+                <Lock className="h-8 w-8 text-purple-400" />
+              </div>
+              <div className="text-2xl font-bold text-purple-400">Immutable</div>
+              <p className="text-sm text-muted-foreground mt-1">Historical Record</p>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-primary">Secure</div>
-              <p className="text-sm text-muted-foreground">Decentralized Storage</p>
+            <div className="text-center p-4 rounded-lg bg-teal-500/10 border border-teal-500/20">
+              <div className="flex justify-center mb-3">
+                <HardDrive className="h-8 w-8 text-teal-400" />
+              </div>
+              <div className="text-2xl font-bold text-teal-400">Secure</div>
+              <p className="text-sm text-muted-foreground mt-1">Decentralized Storage</p>
             </div>
           </div>
         </CardContent>
